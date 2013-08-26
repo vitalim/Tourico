@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Vitali Margolin"]
   gem.email         = ["vitali.m86@gmail.com"]
   gem.description   = %q{Tourico holidays web service}
-  gem.summary       = %q{Tourico holidays hotels web service}
-  gem.homepage      = "doc.touricoholidays.com"
+  gem.summary       = %q{Tourico holidays web service}
+  gem.homepage      = "http://doc.touricoholidays.com"
   gem.license       = "MIT"
 
   gem.files         = `git ls-files`.split($/)
@@ -20,5 +20,5 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'rspec', '~> 2.6'
-  gem.add_development_dependency 'savon', '~> 1.2.0'
+  gem.add_runtime_dependency 'savon', '~> 1.2.0'
 end
