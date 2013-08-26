@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["vitali.m86@gmail.com"]
   gem.description   = %q{Tourico holidays web service}
   gem.summary       = %q{Tourico holidays hotels web service}
-  gem.homepage      = ""
+  gem.homepage      = "doc.touricoholidays.com"
   gem.license       = "MIT"
 
   gem.files         = `git ls-files`.split($/)
