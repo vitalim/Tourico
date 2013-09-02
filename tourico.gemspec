@@ -8,8 +8,8 @@ Gem::Specification.new do |gem|
   gem.version       = Tourico::VERSION
   gem.authors       = ["Vitali Margolin"]
   gem.email         = ["vitali.m86@gmail.com"]
-  gem.description   = %q{Tourico holidays web service}
-  gem.summary       = %q{Tourico holidays web service}
+  gem.description   = %q{Tourico gem is a ruby wrapper for Tourico API Affiliate Network}
+  gem.summary       = %q{Tourico gem is a ruby wrapper for Tourico API Affiliate Network}
   gem.homepage      = "http://doc.touricoholidays.com"
   gem.license       = "MIT"
 
