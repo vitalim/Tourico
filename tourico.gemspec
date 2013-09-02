@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["vitali.m86@gmail.com"]
   gem.description   = %q{Tourico gem is a ruby wrapper for Tourico API Affiliate Network}
   gem.summary       = %q{Tourico gem is a ruby wrapper for Tourico API Affiliate Network}
-  gem.homepage      = "http://doc.touricoholidays.com"
+  gem.homepage      = "https://github.com/vitalim/Tourico"
   gem.license       = "MIT"
 
   gem.files         = `git ls-files`.split($/)
