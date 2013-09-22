@@ -9,6 +9,10 @@ module Tourico
       services(:search_hotels, args)
     end
 
+    def get_list_by_hotel(args)
+      services(:search_hotels_by_id, args)
+    end
+
     def get_hotel_details(args)
       services(:get_hotel_details_v3,args)
     end
@@ -52,7 +56,7 @@ module Tourico
 
     def services (action, args)
       reservations_services = [:get_cancellation_policies, :get_previous_RG,:get_cancellation_fee,:cancel_reservation]
-      hotel_services = [:search_hotels,:get_hotel_details_v3,:book_hotel_v3, :check_availability_and_prices]
+      hotel_services = [:search_hotels,:search_hotels_by_id,:get_hotel_details_v3,:book_hotel_v3, :check_availability_and_prices]
 
       if reservations_services.include?(action)
         return HTTPService.make_request_reservation_service(action, args)

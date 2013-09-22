@@ -37,7 +37,6 @@ module Tourico
          end
        end
 
-
        def make_request_reservation_service(action, args, options = {})
 
          client = Savon::Client.new(API_RESERVATION_SERVICE_LINK)
