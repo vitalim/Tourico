@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tourico (0.0.2)
+    tourico (0.0.3)
       savon (~> 1.2.0)
 
 GEM
