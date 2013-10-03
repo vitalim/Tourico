@@ -8,9 +8,9 @@ module Tourico
 
     # initializer with all the configuration values
     def setup
-      self[:sandbox] = true
-      self[:hotel_service_link] = 'http://demo-hotelws.touricoholidays.com/HotelFlow.svc?wsdl'
-      self[:reservation_service_link] = 'http://demo-wsnew.touricoholidays.com/reservationsservice.asmx?wsdl'
+      self.sandbox = true
+      self.hotel_service_link = 'http://demo-hotelws.touricoholidays.com/HotelFlow.svc?wsdl'
+      self.reservation_service_link = 'http://demo-wsnew.touricoholidays.com/reservationsservice.asmx?wsdl'
       yield self
     end
 

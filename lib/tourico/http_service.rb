@@ -2,13 +2,11 @@ require 'savon'
 
 module Tourico
   module HTTPService
-    API_HOTEL_SERVICE_LINK = Tourico.hotel_service_link
-    API_RESERVATION_SERVICE_LINK = Tourico.hotel_service_link
 
     class << self
        def make_request(action, args, options = {})
 
-         client = Savon::Client.new(API_HOTEL_SERVICE_LINK)
+         client = Savon::Client.new(Tourico.hotel_service_link)
 
          response = client.request :hot, action do
 
@@ -39,7 +37,7 @@ module Tourico
 
        def make_request_reservation_service(action, args, options = {})
 
-         client = Savon::Client.new(API_RESERVATION_SERVICE_LINK)
+         client = Savon::Client.new(Tourico.hotel_service_link)
 
          response = client.request :hot, action do
 
