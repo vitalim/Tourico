@@ -2,8 +2,8 @@ require 'savon'
 
 module Tourico
   module HTTPService
-    API_HOTEL_SERVICE_LINK = 'http://demo-hotelws.touricoholidays.com/HotelFlow.svc?wsdl'
-    API_RESERVATION_SERVICE_LINK = 'http://demo-wsnew.touricoholidays.com/reservationsservice.asmx?wsdl'
+    API_HOTEL_SERVICE_LINK = Tourico.hotel_service_link
+    API_RESERVATION_SERVICE_LINK = Tourico.hotel_service_link
 
     class << self
        def make_request(action, args, options = {})
