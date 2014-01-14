@@ -12,6 +12,10 @@ module Tourico
       self.hotel_service_link = 'http://demo-hotelws.touricoholidays.com/HotelFlow.svc?wsdl'
       self.reservation_service_link = 'http://demo-wsnew.touricoholidays.com/reservationsservice.asmx?wsdl'
       yield self
+
+      Savon.configure do|config|
+        config.log_level = :error
+      end
     end
 
   end

@@ -8,6 +8,8 @@ module Tourico
 
          client = Savon::Client.new(Tourico.hotel_service_link)
 
+         #client.log_level = :error
+
          response = client.request :hot, action do
 
            soap.namespaces['xmlns:env'] = 'http://schemas.xmlsoap.org/soap/envelope/'
