@@ -14,7 +14,7 @@ module Tourico
       yield self
 
       Savon.configure do|config|
-        config.log_level = :error
+        config.log = false
       end
     end
 
