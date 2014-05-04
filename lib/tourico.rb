@@ -13,9 +13,9 @@ module Tourico
       self.reservation_service_link = 'http://demo-wsnew.touricoholidays.com/reservationsservice.asmx?wsdl'
       yield self
 
-      Savon.configure do|config|
-        config.log = false
-      end
+      # Savon.configure do|config|
+      #   config.log = false
+      # end
     end
 
   end

@@ -20,5 +20,5 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'rspec', '~> 2.6'
-  gem.add_runtime_dependency 'savon', '~> 1.2.0'
+  gem.add_runtime_dependency 'savon', '~> 2.5.0'
 end

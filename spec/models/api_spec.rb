@@ -31,8 +31,8 @@ describe Tourico::Api do
                 'hot1:HotelIdInfo' => '',
                 :attributes! => {'hot1:HotelIdInfo' => {'id' => '1314802'}},
             },
-            'hot1:CheckIn' => '2013-10-23',
-            'hot1:CheckOut' => '2013-10-25',
+            'hot1:CheckIn' => '2014-05-10',
+            'hot1:CheckOut' => '2014-05-12',
             'hot1:RoomsInformation' => {
                 'hot1:RoomInfo' => {
                     'hot1:AdultNum' => '2',
@@ -141,8 +141,8 @@ describe Tourico::Api do
               'hot1:HotelIdInfo' => '',
               :attributes! => {'hot1:HotelIdInfo' => {'id' => '1215560'}}
             },
-            'hot1:CheckIn' => '2013-10-23',
-            'hot1:CheckOut' => '2013-10-25',
+            'hot1:CheckIn' => '2014-10-23',
+            'hot1:CheckOut' => '2014-10-25',
             'hot1:RoomsInformation' => {
                 'hot1:RoomInfo' => {
                     'hot1:AdultNum' => '2',
