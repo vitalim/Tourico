@@ -7,7 +7,7 @@ module Tourico
       def make_request(action, args, options = {})
         puts 'Making hotels request to Tourico'
         client = Savon.client do
-          log true
+          log Tourico.show_logs
           wsdl Tourico.hotel_service_link
           soap_header  'aut:AuthenticationHeader' => {
               'aut:LoginName' => Tourico.login_name,
@@ -36,7 +36,7 @@ module Tourico
       def make_request_reservation_service(action, args, options = {})
         puts 'Making reservations request to Tourico'
         client = Savon.client do
-
+          log Tourico.show_logs
           wsdl Tourico.reservation_service_link
           soap_header  'aut:AuthenticationHeader' => {
               'aut:LoginName' => Tourico.login_name,
