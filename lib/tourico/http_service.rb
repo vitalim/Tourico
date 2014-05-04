@@ -8,7 +8,7 @@ module Tourico
         puts 'Making hotels request to Tourico'
         client = Savon.client do
           log true
-          wsdl `Tourico.hotel_service_link`
+          wsdl Tourico.hotel_service_link
           soap_header  'aut:AuthenticationHeader' => {
               'aut:LoginName' => Tourico.login_name,
               'aut:Password' => Tourico.password,
