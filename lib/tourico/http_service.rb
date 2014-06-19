@@ -38,18 +38,18 @@ module Tourico
         client = Savon.client do
           log Tourico.show_logs
           wsdl Tourico.reservation_service_link
-          soap_header  'aut:AuthenticationHeader' => {
-              'aut:LoginName' => Tourico.login_name,
-              'aut:Password' => Tourico.password,
-              'aut:Culture' => Tourico.culture,
-              'aut:Version' => Tourico.reservations_service_version
+          soap_header  'web:LoginHeader' => {
+		          'trav:username' => Tourico.login_name,
+		          'trav:password' => Tourico.password,
+		          'trav:culture' => Tourico.culture,
+		          'trav:version' => Tourico.reservations_service_version
           }
           namespaces(
-              'xmlns:env'  => 'http://www.w3.org/2003/05/soap-envelope',
-              'xmlns:web'  => 'http://tourico.com/webservices/',
-              'xmlns:hot'  => 'http://tourico.com/webservices/',
-              'xmlns:wsdl'  => 'http://tourico.com/webservices/',
-              'xmlns:trav' => 'http://tourico.com/travelservices/')
+		          'xmlns:env' => 'http://schemas.xmlsoap.org/soap/envelope/',
+		          'xmlns:web'  => 'http://tourico.com/webservices/',
+		          'xmlns:hot'  => 'http://tourico.com/webservices/',
+		          'xmlns:wsdl'  => 'http://tourico.com/webservices/',
+		          'xmlns:trav' => 'http://tourico.com/travelservices/')
         end
 
         response = client.call(action, message: args)

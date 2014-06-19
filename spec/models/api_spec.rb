@@ -65,8 +65,8 @@ describe Tourico::Api do
         #'web:nResID' => '',
         'web:hotelId' =>'2210',
         'web:hotelRoomTypeId' => '5437',
-        'web:dtCheckIn' => '2013-08-28',
-        'web:dtCheckOut' => '2013-08-29'
+        'web:dtCheckIn' => '2014-08-28',
+        'web:dtCheckOut' => '2014-08-29'
     }
 
     api.get_cancellation_policy(args).should_not be_nil
