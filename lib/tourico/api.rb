@@ -25,6 +25,18 @@ module Tourico
       services(:book_hotel_v3,args)
     end
 
+    def book_hotel_v3_with_retry(args,try_count = 1)
+      supplier_response = ''
+      try_count.times do
+        supplier_response = book_hotel_v3(args)
+        itinerary_id = supplier_response[:book_hotel_v3_response][:book_hotel_v3_result][:res_group][:@rg_id] rescue ''
+        if !itinerary_id.blank?
+          break
+        end
+      end
+      supplier_response
+    end
+
     def get_cancellation_fee_for_reservation(args)
       services(:get_cancellation_fee, args)
     end
