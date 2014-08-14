@@ -4,9 +4,13 @@ module Tourico
   module HTTPService
 
     class << self
-      def make_request(action, args, options = {})
+      def make_request(action, args, options = {:is_proxy => true})
         puts 'Making hotels request to Tourico'
+        is_proxy = options[:is_proxy]
         client = Savon.client do
+	        if is_proxy
+						proxy 'http://roomer:roomer12@23.21.188.178:3128'
+	        end
           log Tourico.show_logs
           wsdl Tourico.hotel_service_link
           soap_header  'aut:AuthenticationHeader' => {
@@ -33,9 +37,13 @@ module Tourico
         end
       end
 
-      def make_request_reservation_service(action, args, options = {})
+      def make_request_reservation_service(action, args, options = {:is_proxy => true})
         puts 'Making reservations request to Tourico'
+        is_proxy = options[:is_proxy]
         client = Savon.client do
+	        if is_proxy
+		        proxy 'http://roomer:roomer12@23.21.188.178:3128'
+	        end
           log Tourico.show_logs
           wsdl Tourico.reservation_service_link
           soap_header  'web:LoginHeader' => {
