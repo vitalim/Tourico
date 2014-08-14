@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tourico (0.0.7.4)
+    tourico (0.0.7.5)
       savon (~> 2.5.0)
 
 GEM
@@ -21,7 +21,7 @@ GEM
       systemu (~> 2.6.2)
     mime-types (1.25.1)
     mini_portile (0.6.0)
-    nokogiri (1.6.3.1)
+    nokogiri (1.6.2.1)
       mini_portile (= 0.6.0)
     nori (2.4.0)
     rack (1.5.2)
