@@ -7,8 +7,8 @@ describe Tourico::Api do
     args = {
         'hot:request' => {
             'hot1:Destination' => 'NYC',
-            'hot1:CheckIn' => '2013-10-23',
-            'hot1:CheckOut' => '2013-10-25',
+            'hot1:CheckIn' => (DateTime.now + 1.day).strftime('%Y-%m-%d'),
+            'hot1:CheckOut' => (DateTime.now + 3.day).strftime('%Y-%m-%d'),
             'hot1:RoomsInformation' => {
                 'hot1:RoomInfo' => {
                     'hot1:AdultNum' => '2',
@@ -65,8 +65,8 @@ describe Tourico::Api do
         #'web:nResID' => '',
         'web:hotelId' =>'2210',
         'web:hotelRoomTypeId' => '5437',
-        'web:dtCheckIn' => '2014-08-28',
-        'web:dtCheckOut' => '2014-08-29'
+        'web:dtCheckIn' =>  (DateTime.now + 1.day).strftime('%Y-%m-%d'),
+        'web:dtCheckOut' =>  (DateTime.now + 2.day).strftime('%Y-%m-%d')
     }
 
     api.get_cancellation_policy(args).should_not be_nil
@@ -88,8 +88,8 @@ describe Tourico::Api do
             'hot1:RecordLocatorId' => '0',
             'hot1:HotelId' => '1215560',
             'hot1:HotelRoomTypeId' => '1973855',
-            'hot1:CheckIn' => '2013-09-23',
-            'hot1:CheckOut' => '2013-09-25',
+            'hot1:CheckIn' =>  (DateTime.now + 1.day).strftime('%Y-%m-%d'),
+            'hot1:CheckOut' => (DateTime.now + 3.day).strftime('%Y-%m-%d'),
             'hot1:RoomsInfo' => {
                 'hot1:RoomReserveInfo' => {
                     'hot1:RoomId' => '1',
@@ -126,7 +126,7 @@ describe Tourico::Api do
     api = Tourico::Api.new
     args = {
         'web:nResID' => '37434386',
-        'web:clxDate'  => '2013-08-26'
+        'web:clxDate'  =>  (DateTime.now + 1.day).strftime('%Y-%m-%d')
     }
 
     api.get_cancellation_fee_for_reservation(args).should_not be_nil
@@ -141,8 +141,8 @@ describe Tourico::Api do
               'hot1:HotelIdInfo' => '',
               :attributes! => {'hot1:HotelIdInfo' => {'id' => '1215560'}}
             },
-            'hot1:CheckIn' => '2014-10-23',
-            'hot1:CheckOut' => '2014-10-25',
+            'hot1:CheckIn' =>  (DateTime.now + 1.day).strftime('%Y-%m-%d'),
+            'hot1:CheckOut' =>  (DateTime.now + 3.day).strftime('%Y-%m-%d'),
             'hot1:RoomsInformation' => {
                 'hot1:RoomInfo' => {
                     'hot1:AdultNum' => '2',
