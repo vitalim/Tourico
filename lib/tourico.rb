@@ -12,7 +12,7 @@ module Tourico
       self.hotel_service_link = 'http://demo-hotelws.touricoholidays.com/HotelFlow.svc?wsdl'
       self.reservation_service_link = 'http://demo-wsnew.touricoholidays.com/reservationsservice.asmx?wsdl'
       self.show_logs = false
-      self.open_timeout = 1
+      self.open_timeout = 2
       self.read_timeout = 10
       yield self
 

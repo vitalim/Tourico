@@ -67,8 +67,8 @@ module Tourico
     private
 
     def services (action, args)
-      reservations_services = [:get_cancellation_policies, :get_previous_RG,:get_cancellation_fee,:cancel_reservation]
-      hotel_services = [:search_hotels,:search_hotels_by_id,:get_hotel_details_v3,:book_hotel_v3, :check_availability_and_prices]
+      reservations_services = [:get_previous_RG]
+      hotel_services = [:search_hotels,:search_hotels_by_id,:get_hotel_details_v3,:book_hotel_v3, :check_availability_and_prices,:get_cancellation_policies,:get_cancellation_fee,:cancel_reservation]
 
       if reservations_services.include?(action)
         return HTTPService.make_request_reservation_service(action, args)

@@ -50,8 +50,12 @@ module Tourico
         client = Savon.client do
 	        if Tourico.proxy_url.present?
 		        proxy Tourico.proxy_url
-            end
-          digest_auth('proxy_user', 'r00merhas1t!')
+          end
+
+          if Tourico.digest_auth.present?
+            digest_auth(Tourico.digest_auth[:username], Tourico.digest_auth[:password])
+          end
+
 	        log Tourico.show_logs
           wsdl Tourico.reservation_service_link
           soap_header  'web:LoginHeader' => {
