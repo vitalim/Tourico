@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tourico (0.0.8.1)
+    tourico (0.0.8.2)
       savon (~> 2.5.0)
 
 GEM
@@ -19,11 +19,13 @@ GEM
       rubyntlm (~> 0.3.2)
     macaddr (1.7.1)
       systemu (~> 2.6.2)
-    mini_portile (0.6.2)
-    nokogiri (1.6.5)
-      mini_portile (~> 0.6.0)
+    mini_portile2 (2.1.0)
+    nokogiri (1.6.8)
+      mini_portile2 (~> 2.1.0)
+      pkg-config (~> 1.1.7)
     nori (2.4.0)
-    rack (1.5.2)
+    pkg-config (1.1.7)
+    rack (2.0.1)
     rake (10.1.1)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
@@ -43,8 +45,8 @@ GEM
       nori (~> 2.4.0)
       uuid (~> 2.3.7)
       wasabi (~> 3.3.0)
-    systemu (2.6.4)
-    uuid (2.3.7)
+    systemu (2.6.5)
+    uuid (2.3.8)
       macaddr (~> 1.0)
     wasabi (3.3.1)
       httpi (~> 2.0)
@@ -59,4 +61,4 @@ DEPENDENCIES
   tourico!
 
 BUNDLED WITH
-   1.11.2
+   1.12.5
