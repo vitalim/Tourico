@@ -10,9 +10,7 @@ module Tourico
           if Tourico.proxy_url.present?
             proxy Tourico.proxy_url
           end
-          if Tourico.digest_auth.present?
-            digest_auth(Tourico.digest_auth[:username], Tourico.digest_auth[:password])
-          end
+
           log Tourico.show_logs
           wsdl Tourico.hotel_service_link
 
@@ -53,11 +51,7 @@ module Tourico
             proxy Tourico.proxy_url
           end
 
-          if Tourico.digest_auth.present?
-            digest_auth(Tourico.digest_auth[:username], Tourico.digest_auth[:password])
-          end
-
-          log Tourico.show_logs
+	        log Tourico.show_logs
           wsdl Tourico.reservation_service_link
           soap_header  'web:LoginHeader' => {
               'trav:username' => Tourico.login_name,
@@ -87,9 +81,7 @@ module Tourico
           if Tourico.proxy_url.present?
             proxy Tourico.proxy_url
           end
-          if Tourico.digest_auth.present?
-            digest_auth(Tourico.digest_auth[:username], Tourico.digest_auth[:password])
-          end
+
           log Tourico.show_logs
           wsdl Tourico.destination_service_link
 
