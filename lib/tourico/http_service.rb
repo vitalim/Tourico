@@ -7,8 +7,8 @@ module Tourico
       def make_request(action, args, options = {})
         puts 'Making hotels request to Tourico'
         client = Savon.client do
-	        if Tourico.proxy_url.present?
-						proxy Tourico.proxy_url
+          if Tourico.proxy_url.present?
+            proxy Tourico.proxy_url
           end
           if Tourico.digest_auth.present?
             digest_auth(Tourico.digest_auth[:username], Tourico.digest_auth[:password])
@@ -27,6 +27,7 @@ module Tourico
               'aut:Culture'   => Tourico.culture,
               'aut:Version'   => Tourico.hotels_service_version
           }
+          headers ({ 'Accept-Encoding' => 'gzip, deflate' })
           namespaces(
               'xmlns:env'  => 'http://schemas.xmlsoap.org/soap/envelope/',
               'xmlns:aut'  => 'http://schemas.tourico.com/webservices/authentication',
@@ -48,28 +49,29 @@ module Tourico
       def make_request_reservation_service(action, args, options = {})
         puts 'Making reservations request to Tourico'
         client = Savon.client do
-	        if Tourico.proxy_url.present?
-		        proxy Tourico.proxy_url
+          if Tourico.proxy_url.present?
+            proxy Tourico.proxy_url
           end
 
           if Tourico.digest_auth.present?
             digest_auth(Tourico.digest_auth[:username], Tourico.digest_auth[:password])
           end
 
-	        log Tourico.show_logs
+          log Tourico.show_logs
           wsdl Tourico.reservation_service_link
           soap_header  'web:LoginHeader' => {
-		          'trav:username' => Tourico.login_name,
-		          'trav:password' => Tourico.password,
-		          'trav:culture'  => Tourico.culture,
-		          'trav:version'  => Tourico.reservations_service_version
+              'trav:username' => Tourico.login_name,
+              'trav:password' => Tourico.password,
+              'trav:culture'  => Tourico.culture,
+              'trav:version'  => Tourico.reservations_service_version
           }
+          headers ({ 'Accept-Encoding' => 'gzip, deflate' })
           namespaces(
-		          'xmlns:env'  => 'http://schemas.xmlsoap.org/soap/envelope/',
-		          'xmlns:web'  => 'http://tourico.com/webservices/',
-		          'xmlns:hot'  => 'http://tourico.com/webservices/',
-		          'xmlns:wsdl' => 'http://tourico.com/webservices/',
-		          'xmlns:trav' => 'http://tourico.com/travelservices/')
+              'xmlns:env'  => 'http://schemas.xmlsoap.org/soap/envelope/',
+              'xmlns:web'  => 'http://tourico.com/webservices/',
+              'xmlns:hot'  => 'http://tourico.com/webservices/',
+              'xmlns:wsdl' => 'http://tourico.com/webservices/',
+              'xmlns:trav' => 'http://tourico.com/travelservices/')
         end
 
         response = client.call(action, message: args)
@@ -102,6 +104,7 @@ module Tourico
               'dat:culture'   => Tourico.culture,
               'dat:version'   => Tourico.destination_service_version
           }
+          headers ({ 'Accept-Encoding' => 'gzip, deflate' })
           namespaces(
               'xmlns:env'  => 'http://schemas.xmlsoap.org/soap/envelope/',
               'xmlns:dat' => 'http://touricoholidays.com/WSDestinations/2008/08/DataContracts',
