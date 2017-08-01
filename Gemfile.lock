@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tourico (0.0.8.6)
+    tourico (0.0.8.6.beta)
       savon (~> 2.5.0)
 
 GEM
@@ -19,11 +19,11 @@ GEM
       rubyntlm (~> 0.3.2)
     macaddr (1.7.1)
       systemu (~> 2.6.2)
-    mini_portile2 (2.1.0)
-    nokogiri (1.7.0.1)
-      mini_portile2 (~> 2.1.0)
+    mini_portile2 (2.2.0)
+    nokogiri (1.8.0)
+      mini_portile2 (~> 2.2.0)
     nori (2.4.0)
-    rack (2.0.1)
+    rack (2.0.3)
     rake (10.1.1)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
