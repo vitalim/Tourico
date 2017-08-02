@@ -1,3 +1,3 @@
 module Tourico
-  VERSION = '0.0.8.6.beta'
+  VERSION = '0.0.8.7'
 end
