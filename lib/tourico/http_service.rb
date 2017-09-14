@@ -7,7 +7,7 @@ module Tourico
     DESTINATION_SERVICE_LINK = 'http://destservices.touricoholidays.com/DestinationsService.svc?wsdl'.freeze
     class << self
       def make_request(action, args, settings)
-        puts 'Making hotels request to Tourico'
+        puts 'Making hotels request to Tourico ' + action.to_s
         configuration = config
         apply_timeout = apply_timeout?(action)
         client = Savon.client do
@@ -38,7 +38,7 @@ module Tourico
               'xmlns:hot1' => 'http://schemas.tourico.com/webservices/hotelv3')
         end
         response = client.call(action, message: args)
-        puts 'Finished request for Tourico'
+        puts 'Finished request for Tourico ' + action.to_s
         if response.success?
           response.to_hash
         else
