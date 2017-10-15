@@ -13,8 +13,9 @@ module Tourico
   end
 
   class Configuration
-    attr_accessor :show_logs, :open_timeout, :read_timeout, :culture, :hotels_service_version,
-                  :reservations_service_version, :location_service_version, :proxy_url
+    attr_accessor :show_logs, :open_timeout, :read_timeout, :culture,
+                  :hotels_service_version, :reservations_service_version,
+                  :location_service_version, :proxy_url, :production
 
     def initialize
       @show_logs = false
@@ -25,6 +26,7 @@ module Tourico
       @reservations_service_version = '8.5'
       @location_service_version = '1'
       @proxy_url = ''
+      @production = Rails.env.production?
     end
   end
 end

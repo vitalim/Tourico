@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tourico (0.0.8.7)
+    tourico (0.0.8.beta2)
       savon (~> 2.5.0)
 
 GEM
@@ -59,4 +59,4 @@ DEPENDENCIES
   tourico!
 
 BUNDLED WITH
-   1.14.5
+   1.15.4
