@@ -18,21 +18,18 @@ Or install it yourself as:
 
 ## Usage
 
+If you need proxy:
+
 Create initializers/tourico.rb
 
-    Tourico.setup do |config|
-      config.login_name = ''
-      config.password = ''
-      config.culture = 'en_US'
-      config.hotels_service_version = '8.5'
-      config.reservations_service_version = '8.5'
-      config.location_service_version = '1'
-    end
-
+    Tourico.proxy_url = '' # your proxy url
 
 ## Sample
-
-    api = Tourico::Api.new
+    class SupplierSettings
+        attr_accessor :username, :password    
+    end
+    supplier_settings = SupplierSettings.new(username: '', password: '') # your credentials
+    client = Tourico::Api.new(supplier_settings)
     args = {
         'hot:request' => {
             'hot1:Destination' => 'NYC',
@@ -49,7 +46,7 @@ Create initializers/tourico.rb
             'hot1:AvailableOnly' => 'true'
         }
     }
-    response = api.get_list(args)
+    response = client.get_list(args)
 
 
 All the other samples could be found inside the Rspec directory:
