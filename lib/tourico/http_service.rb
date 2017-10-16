@@ -2,41 +2,44 @@ require 'savon'
 
 module Tourico
   module HTTPService
-
+    DEMO_HOTEL_SERVICE_LINK = 'http://demo-hotelws.touricoholidays.com/HotelFlow.svc?wsdl'.freeze
+    DEMO_RESERVATION_SERVICE_LINK = 'http://demo-wsnew.touricoholidays.com/reservationsservice.asmx?wsdl'.freeze
+    DEMO_DESTINATION_SERVICE_LINK = 'http://destservices.touricoholidays.com/DestinationsService.svc?wsdl'.freeze
+    HOTEL_SERVICE_LINK = 'http://thfwsv3.touricoholidays.com/HotelFlow.svc?wsdl'.freeze
+    RESERVATION_SERVICE_LINK = 'http://newws.touricoholidays.com/ReservationsService.asmx?wsdl'.freeze
+    DESTINATION_SERVICE_LINK = 'http://destservices.touricoholidays.com/DestinationsService.svc?wsdl'.freeze
     class << self
-      def make_request(action, args, options = {})
-        puts 'Making hotels request to Tourico'
+      def make_request(action, args, settings)
+        puts 'Making hotels request to Tourico ' + action.to_s
+        configuration = config
+        apply_timeout = apply_timeout?(action)
         client = Savon.client do
-          if Tourico.proxy_url.present?
-            proxy Tourico.proxy_url
+          if configuration.proxy_url.present?
+            proxy configuration.proxy_url
           end
 
-          log Tourico.show_logs
-          wsdl Tourico.hotel_service_link
+          log configuration.show_logs
+          wsdl configuration.production ? HOTEL_SERVICE_LINK : DEMO_HOTEL_SERVICE_LINK
 
-          if HTTPService.apply_timeout?(action)
-            open_timeout Tourico.open_timeout
-            read_timeout Tourico.read_timeout
+          if apply_timeout
+            open_timeout configuration.open_timeout
+            read_timeout configuration.read_timeout
           end
 
-          soap_header  'aut:AuthenticationHeader' => {
-              'aut:LoginName' => Tourico.login_name,
-              'aut:Password'  => Tourico.password,
-              'aut:Culture'   => Tourico.culture,
-              'aut:Version'   => Tourico.hotels_service_version
+          soap_header 'aut:AuthenticationHeader' => {'aut:LoginName' => settings.username,
+                                                     'aut:Password' => settings.password,
+                                                     'aut:Culture' => configuration.culture,
+                                                     'aut:Version' => configuration.hotels_service_version
           }
-          headers ({ 'Accept-Encoding' => 'gzip, deflate' })
-          namespaces(
-              'xmlns:env'  => 'http://schemas.xmlsoap.org/soap/envelope/',
-              'xmlns:aut'  => 'http://schemas.tourico.com/webservices/authentication',
-              'xmlns:hot'  => 'http://tourico.com/webservices/hotelv3',
-              'xmlns:wsdl' => 'http://tourico.com/webservices/hotelv3',
-              'xmlns:hot1' => 'http://schemas.tourico.com/webservices/hotelv3')
+          headers ({'Accept-Encoding' => 'gzip, deflate'})
+          namespaces('xmlns:env' => 'http://schemas.xmlsoap.org/soap/envelope/',
+                     'xmlns:aut' => 'http://schemas.tourico.com/webservices/authentication',
+                     'xmlns:hot' => 'http://tourico.com/webservices/hotelv3',
+                     'xmlns:wsdl' => 'http://tourico.com/webservices/hotelv3',
+                     'xmlns:hot1' => 'http://schemas.tourico.com/webservices/hotelv3')
         end
-
         response = client.call(action, message: args)
-
-        puts 'Finished request for Tourico'
+        puts 'Finished request for Tourico ' + action.to_s
         if response.success?
           response.to_hash
         else
@@ -44,28 +47,32 @@ module Tourico
         end
       end
 
-      def make_request_reservation_service(action, args, options = {})
+      def make_request_reservation_service(action, args, settings)
         puts 'Making reservations request to Tourico'
+        configuration = config
+        apply_timeout = apply_timeout?(action)
         client = Savon.client do
-          if Tourico.proxy_url.present?
-            proxy Tourico.proxy_url
+          if configuration.proxy_url.present?
+            proxy configuration.proxy_url
           end
 
-	        log Tourico.show_logs
-          wsdl Tourico.reservation_service_link
-          soap_header  'web:LoginHeader' => {
-              'trav:username' => Tourico.login_name,
-              'trav:password' => Tourico.password,
-              'trav:culture'  => Tourico.culture,
-              'trav:version'  => Tourico.reservations_service_version
+          log config.show_logs
+          wsdl config.production ? RESERVATION_SERVICE_LINK : DEMO_RESERVATION_SERVICE_LINK
+          if apply_timeout
+            open_timeout configuration.open_timeout
+            read_timeout configuration.read_timeout
+          end
+          soap_header 'web:LoginHeader' => {'trav:username' => settings.username,
+                                            'trav:password' => settings.password,
+                                            'trav:culture' => configuration.culture,
+                                            'trav:version' => configuration.reservations_service_version
           }
-          headers ({ 'Accept-Encoding' => 'gzip, deflate' })
-          namespaces(
-              'xmlns:env'  => 'http://schemas.xmlsoap.org/soap/envelope/',
-              'xmlns:web'  => 'http://tourico.com/webservices/',
-              'xmlns:hot'  => 'http://tourico.com/webservices/',
-              'xmlns:wsdl' => 'http://tourico.com/webservices/',
-              'xmlns:trav' => 'http://tourico.com/travelservices/')
+          headers ({'Accept-Encoding' => 'gzip, deflate'})
+          namespaces('xmlns:env' => 'http://schemas.xmlsoap.org/soap/envelope/',
+                     'xmlns:web' => 'http://tourico.com/webservices/',
+                     'xmlns:hot' => 'http://tourico.com/webservices/',
+                     'xmlns:wsdl' => 'http://tourico.com/webservices/',
+                     'xmlns:trav' => 'http://tourico.com/travelservices/')
         end
 
         response = client.call(action, message: args)
@@ -75,32 +82,32 @@ module Tourico
 
       end
 
-      def make_request_destination_service(action, args, options = {})
+      def make_request_destination_service(action, args, settings)
         puts 'Making destination request to Tourico'
+        configuration = config
+        apply_timeout = apply_timeout?(action)
         client = Savon.client do
-          if Tourico.proxy_url.present?
-            proxy Tourico.proxy_url
+          if configuration.proxy_url.present?
+            proxy configuration.proxy_url
           end
 
-          log Tourico.show_logs
-          wsdl Tourico.destination_service_link
+          log configuration.show_logs
+          wsdl config.production ? DESTINATION_SERVICE_LINK : DEMO_DESTINATION_SERVICE_LINK
 
-          if HTTPService.apply_timeout?(action)
-            open_timeout Tourico.open_timeout
-            read_timeout Tourico.read_timeout
+          if apply_timeout
+            open_timeout configuration.open_timeout
+            read_timeout configuration.read_timeout
           end
 
-          soap_header  'dat:LoginHeader' => {
-              'dat:username' => Tourico.login_name,
-              'dat:password'  => Tourico.password,
-              'dat:culture'   => Tourico.culture,
-              'dat:version'   => Tourico.destination_service_version
+          soap_header 'dat:LoginHeader' => {'dat:username' => settings.username,
+                                            'dat:password' => settings.password,
+                                            'dat:culture' => configuration.culture,
+                                            'dat:version' => configuration.destination_service_version
           }
-          headers ({ 'Accept-Encoding' => 'gzip, deflate' })
-          namespaces(
-              'xmlns:env'  => 'http://schemas.xmlsoap.org/soap/envelope/',
-              'xmlns:dat' => 'http://touricoholidays.com/WSDestinations/2008/08/DataContracts',
-              'xmlns:wsdl' => 'http://touricoholidays.com/WSDestinations/2008/08/DataContracts'
+          headers ({'Accept-Encoding' => 'gzip, deflate'})
+          namespaces('xmlns:env' => 'http://schemas.xmlsoap.org/soap/envelope/',
+                     'xmlns:dat' => 'http://touricoholidays.com/WSDestinations/2008/08/DataContracts',
+                     'xmlns:wsdl' => 'http://touricoholidays.com/WSDestinations/2008/08/DataContracts'
           )
         end
 
@@ -114,9 +121,13 @@ module Tourico
         end
       end
 
-      #apply api call timeout except for while checkout
+      # apply api call timeout except for while checkout
       def apply_timeout?(action)
-        (action.to_s == 'book_hotel_v3') ? false : true
+        action.to_s != 'book_hotel_v3'
+      end
+
+      def config
+        Tourico.configuration
       end
 
     end
